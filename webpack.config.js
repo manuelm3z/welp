@@ -24,4 +24,17 @@ config.postcss = [].concat([
 	require('cssnano')({})
 ]);
 
+const cssModulesNames = `${isDev ? '[path][name]__[local]__' : ''}[hash:base64:5]`;
+
+const matchCssLoaders = /(^|!)(css-loader)($|!)/;
+
+const findLoader = (loaders, match) => {
+	const found = loaders.filter(l => l && l.loader && l.loader.match(match));
+
+	return found ? found[0] : null;
+}
+
+//existing css loader
+const cssloader = findLoader(config.module.loaders, matchCssLoaders);
+
 module.exports = config;
