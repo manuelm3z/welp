@@ -1,6 +1,7 @@
 const NODE_ENV = process.env.NODE_ENV;
 
-const isDev = NODE_ENV === 'development';
+const isDev = NODE_ENV === 'development',
+	isTest = NODE_ENV === 'test';
 // alternatively, we can use process.argv[1]
 // const isDev = (process.argv[1] || '')
 //					.indexOf('hjs-dev-server') !== -1;
@@ -55,6 +56,7 @@ const defines = Object.keys(envVariables)
 	});
 
 let config = getConfig({
+	isDev,
 	in: join(src, 'app.js'),
 	out: dest,
 	clearBeforeBuild: true
@@ -127,5 +129,31 @@ config.resolve.alias = {
 	'components': join(src, 'components'),
 	'utils': join(src, 'utils')
 };
+
+config.externals = {
+	'react/lib/ReactContext': true,
+	'react/lib/ExecutionEnviroment': true,
+	'react/addons': true
+};
+
+if (isTest) {
+	config.externals = {
+		'react/lib/ReactContext': true,
+		'react/lib/ExecutionEnviroment': true
+	};
+
+	config.plugins = config.plugins.filter(p => {
+		const name = p.constructor.toString();
+
+		const fnName = name.match(/^function (.*)\((.*\))/);
+
+		const idx = [
+			'DedupePlugin',
+			'UglifyJsPlugin'
+		].indexOf(fnName[1]);
+
+		return idx < 0;
+	});
+}
 
 module.exports = config;
