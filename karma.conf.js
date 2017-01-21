@@ -22,7 +22,7 @@ module.exports = function(config) {
         webpack: webpackConfig,
         webpackServer: {
             noInfo: true
-        }
+        },
         // list of files / patterns to load in the browser
         files: [
             'tests.webpack.js'
