@@ -1,4 +1,5 @@
-let webpackConfig = require('./webpack.config');
+const path = require('path'),
+    webpackConfig = require('./webpack.config');
 // Karma configuration
 // Generated on Fri Jan 20 2017 22:04:14 GMT-0300 (ART)
 
