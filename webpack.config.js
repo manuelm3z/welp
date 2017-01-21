@@ -111,6 +111,21 @@ config.module.loaders.push({
 	loader: 'style!css'
 });
 
+/**
+ * Let's add the webpack root to be both the node_modules/ directory 
+ * as well as the src/ directory. We can also set up a few aliases 
+ * referencing the directories we previously created
+ * 
+ * In our source, instead of referencing our containers by relative path,
+ * we can simply call require('containers/SOME/APP')
+ */
+config.resolve.root = [src, modules];
 
+config.resolve.alias = {
+	'css': join(src, 'styles'),
+	'containers': join(src, 'containers'),
+	'components': join(src, 'components'),
+	'utils': join(src, 'utils')
+};
 
 module.exports = config;
