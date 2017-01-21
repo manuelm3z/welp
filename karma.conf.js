@@ -23,7 +23,9 @@ module.exports = function(config) {
             noInfo: true
         }
         // list of files / patterns to load in the browser
-        files: [],
+        files: [
+            'tests.webpack.js'
+        ],
         // list of files to exclude
         exclude: [],
         // preprocess matching files before serving them to the browser
