@@ -37,4 +37,27 @@ const findLoader = (loaders, match) => {
 //existing css loader
 const cssloader = findLoader(config.module.loaders, matchCssLoaders);
 
+//let's create a new loader as well as modify the existing loader to support loading css modules
+const newLoader = Object.assign({}, cssloader, {
+	test: /\.module\.css$/,
+	include: [src],
+	loader: cssloader.loader.replace(matchCssLoaders, `$1$2?modules&localIdentName=${cssModulesNames}$3`)
+});
+
+config.module.loaders.push(newLoader);
+
+cssloader.test = new RegExp(`[^module]${cssloader.test.source}`);
+
+cssloader.loader = newLoader.loader;
+
+/**
+ * In our new loader, we've modified the loading to only include css files in the src directory.
+ * For loading any other css files, such as font awesome, we'll include another css loader for webpack to load without modules support
+ */
+config.module.loaders.push({
+	test: /\.css$/,
+	include: [modules],
+	loader: 'style!css'
+});
+
 module.exports = config;
