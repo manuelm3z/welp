@@ -6,6 +6,15 @@
  */
 require('babel-polyfill');
 
+/**
+ * Since we're going to be using a helper called chai enzyme,
+ * we can set our global configuration up here
+ */
+const chai = require('chai'),
+	chaiEnzyme = require('chai-enzyme');
+
+chai.use(chaiEnzyme());
+
 let context = require.context('./src', true, /\.spec\.js$/);
 
 context.keys().forEach(context);
