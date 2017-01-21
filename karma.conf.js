@@ -54,6 +54,11 @@ module.exports = function(config) {
         singleRun: false,
         // Concurrency level
         // how many browser should be started simultaneous
-        concurrency: Infinity
+        concurrency: Infinity,
+        plugins: [
+            'karma-mocha',
+            'karma-chai',
+            'karma-webpack'
+        ]
     });
 };
