@@ -1,3 +1,4 @@
+let webpackConfig = require('./webpack.config');
 // Karma configuration
 // Generated on Fri Jan 20 2017 22:04:14 GMT-0300 (ART)
 
@@ -11,6 +12,16 @@ module.exports = function(config) {
             'mocha',
             'chai'
         ],
+        /**
+         * As we're using webpack to compile our files together, 
+         * we'll also need to tell karma about our webpack configuration. 
+         * Since we already have one, there is no need to recreate it, 
+         * we'll just require our original one
+         */
+        webpack: webpackConfig,
+        webpackServer: {
+            noInfo: true
+        }
         // list of files / patterns to load in the browser
         files: [],
         // list of files to exclude
