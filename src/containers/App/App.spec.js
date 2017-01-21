@@ -13,6 +13,6 @@ describe('<App />', () => {
 	});
 
 	it('has a single wrapper element', () => {
-		expect(wrapper.find(`${styles.wrapper}`)).to.have.length(1);
+		expect(wrapper.find(`.${styles.wrapper}`)).to.have.length(1);
 	});
 });
