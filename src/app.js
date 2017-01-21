@@ -5,9 +5,10 @@ import styles from './styles.module.css';
 
 class App extends React.Component {
 	render() {
-		console.log(styles);
 		return (
-			<div className={styles.wrapper}>Text text text</div>
+			<div className={styles.wrapper}>
+				<h1>Enviroment: {__NODE_ENV__}</h1>
+			</div>
 			);
 	}
 }
