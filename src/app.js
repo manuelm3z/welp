@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './app.css';
+import styles from './styles.module.css';
 
 class App extends React.Component {
 	render() {
+		console.log(styles);
 		return (
-			<div>Text text text</div>
+			<div className={styles.wrapper}>Text text text</div>
 			);
 	}
 }
