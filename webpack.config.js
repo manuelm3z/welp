@@ -46,11 +46,15 @@ const envVariables = Object.assign({}, dotEnvVars, enviromentEnv);
  */
 const defines = Object.keys(envVariables)
 	.reduce((memo, key) => {
-		const val = JSON.stringify(envVariables[key]);
+		if (envVariables[key] !== undefined) {
+			for (let i in envVariables[key]) {
+				let val = JSON.stringify(envVariables[key][i]);
 
-		memo[`__${key.toUpperCase()}__`] = val;
+				memo[`__${i.toUpperCase()}__`] = val;
+			}
 
-		return memo;
+			return memo;
+		}
 	}, {
 		__NODE_ENV__: JSON.stringify(NODE_ENV)
 	});
